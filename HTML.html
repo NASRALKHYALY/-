@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ديني حياتي | المنصة الإيمانية الذكية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --accent: #d4af37; /* ذهبي ملكي */
+            --accent-glow: rgba(212, 175, 55, 0.3);
+            --bg: #0a0b10; /* أسود كحلي (نمط مبرمجين) */
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        .light-theme {
+            --bg: #f0f2f5;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --text: #1a1a1a;
+            --glass-border: rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: var(--bg); color: var(--text); transition: 0.5s; overflow-x: hidden; line-height: 1.6; }
+
+        /* --- الهيدر المستقبلي (Floating Navbar) --- */
+        .nav-wrapper {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1200px;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .logo-box i {
+            font-size: 1.8rem;
+            color: var(--accent);
+            filter: drop-shadow(0 0 8px var(--accent-glow));
+        }
+
+        .logo-box span {
+            font-size: 1.4rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 8px; }
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--accent);
+        }
+
+        .nav-actions { display: flex; gap: 10px; align-items: center; }
+
+        .theme-btn {
+            background: var(--accent);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #000;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        /* --- الهيرو (Hero Section) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+        }
+
+        .hero-content { text-align: center; z-index: 10; padding: 0 20px; }
+        .hero-content h1 { font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero-content span { color: var(--accent); text-shadow: 0 0 30px var(--accent-glow); }
+        .hero-content p { font-size: 1.2rem; opacity: 0.7; max-width: 600px; margin: 0 auto 40px; }
+
+        /* --- الأقسام والبطاقات الذكية --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header div { width: 50px; height: 4px; background: var(--accent); margin: 0 auto; border-radius: 2px; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 32px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            background: rgba(212, 175, 55, 0.05);
+            border-color: var(--accent);
+        }
+
+        .card i { font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+
+        /* --- مشغل القرآن الاحترافي --- */
+        .quran-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        select {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border);
+            color: var(--text);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        /* --- المسبحة الرقمية --- */
+        .tasbih-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(145deg, #0d0e14, #1a1c25);
+            padding: 50px;
+            border-radius: 60px;
+            border: 1px solid var(--accent);
+            width: fit-content;
+            margin: 0 auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .count-num { font-size: 6rem; font-weight: 900; color: var(--accent); font-family: 'Courier New', Courier, monospace; }
+
+        .tap-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: none;
+            margin: 30px 0;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px var(--accent-glow);
+            transition: 0.1s;
+        }
+
+        .tap-circle:active { transform: scale(0.9); }
+
+        footer { padding: 60px; text-align: center; border-top: 1px solid var(--glass-border); opacity: 0.6; }
+
+        /* أنيميشن */
+        [data-aos] { opacity: 0; transform: translateY(30px); transition: 1s; }
+        .active-aos { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body class="dark-theme">
+
+    <div class="nav-wrapper">
+        <nav>
+            <a href="javascript:location.reload();" class="logo-box">
+                <i class="fas fa-kaaba"></i>
+                <span>ديني حياتي</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#quran">المصحف</a></li>
+                <li><a href="#tasbih">المسبحة</a></li>
+                <li><a href="#tips">كنوز</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-btn" id="themeToggle" title="تغيير الوضع">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>زادُك <span>الإيماني</span><br>بلمسة تقنية</h1>
+            <p>منصة رقمية متكاملة للمسلم المعاصر، تجمع بين هيبة الذكر وحداثة التصميم.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="location.href='#quran'" style="padding: 15px 35px; border-radius: 15px; border: none; background: var(--accent); font-weight: bold; cursor: pointer;">ابدأ التلاوة</button>
+                <button onclick="location.href='#tasbih'" style="padding: 15px 35px; border-radius: 15px; border: 1px solid var(--accent); background: transparent; color: var(--accent); font-weight: bold; cursor: pointer;">المسبحة الذكية</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="container" id="tips">
+        <div class="section-header">
+            <h2>كنوز إيمانية</h2>
+            <div></div>
+        </div>
+        <div class="grid">
+            <div class="card" data-aos>
+                <i class="fas fa-microchip"></i>
+                <h3>تقنية الإخلاص</h3>
+                <p>اجعل محرك نيتك خالصاً لله وحده لتنال القبول في كل عمل.</p>
+            </div>
+            <div class="card" data-aos>
+                <i class="fas fa-code-branch"></i>
+                <h3>مسار التغيير</h3>
+                <p>ورد القرآن اليومي هو الكود الذي يعيد برمجة قلبك نحو السعادة.</p>
+            </div>
+            <div class="card" data-aos>
+                <i class="fas fa-shield-halved"></i>
+                <h3>جدار الحماية</h3>
+                <p>أذكار الصباح والمساء هي الحصن الرقمي الذي يحميك من العوارض.</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="container" id="quran">
+        <div class="section-header">
+            <h2>المصحف المرتل</h2>
+            <div></div>
+        </div>
+        <div class="quran-box" data-aos>
+            <select id="surahSelect">
+                <option disabled selected>-- اختر السورة من القائمة --</option>
+            </select>
+            <div style="text-align: center;">
+                <h3 id="surahName" style="margin-bottom: 20px; color: var(--accent);">بانتظار اختيارك..</h3>
+                <audio id="player" controls style="width: 100%; filter: invert(1); opacity: 0.8;"></audio>
+            </div>
+        </div>
+    </section>
+
+    <section class="container" id="tasbih">
+        <div class="tasbih-wrap" data-aos>
+            <div style="font-size: 0.9rem; letter-spacing: 3px; opacity: 0.5; margin-bottom: 10px;">DIGITAL TASBIH</div>
+            <div class="count-num" id="count">0</div>
+            <div id="zekr" style="font-size: 1.5rem; opacity: 0.8;">سبحان الله</div>
+            <button class="tap-circle" id="tapBtn">سبّح</button>
+            <button id="reset" style="background: transparent; border: none; color: #ff4444; cursor: pointer; font-weight: bold;">إعادة تعيين</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>تم التطوير بواسطة <b>نصر الخيالي</b> &copy; 2025</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">إبداع يدمج بين العلم والإيمان</p>
+    </footer>
+
+    <script>
+        // --- تهيئة البيانات ---
+        const surahs = ["الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"];
+
+        const select = document.getElementById('surahSelect');
+        const player = document.getElementById('player');
+        const sName = document.getElementById('surahName');
+
+        surahs.forEach((n, i) => {
+            let opt = document.createElement('option');
+            opt.value = (i + 1).toString().padStart(3, '0');
+            opt.text = `سورة ${n}`;
+            select.appendChild(opt);
+        });
+
+        select.onchange = (e) => {
+            const val = e.target.value;
+            player.src = `https://server8.mp3quran.net/afs/${val}.mp3`;
+            sName.innerText = `تلاوة سورة ${surahs[parseInt(val)-1]}`;
+            player.play();
+        };
+
+        // --- المسبحة ---
+        let c = 0;
+        const countDisp = document.getElementById('count');
+        document.getElementById('tapBtn').onclick = () => {
+            c++;
+            countDisp.innerText = c;
+            if(navigator.vibrate) navigator.vibrate(40);
+        };
+        document.getElementById('reset').onclick = () => {
+            c = 0;
+            countDisp.innerText = 0;
+        };
+
+        // --- الثيم ---
+        const themeBtn = document.getElementById('themeToggle');
+        themeBtn.onclick = () => {
+            document.body.classList.toggle('light-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            themeBtn.innerHTML = document.body.classList.contains('light-theme') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        };
+
+        // --- تأثيرات الظهور (Scroll Reveal) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) entry.target.classList.add('active-aos');
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-aos]').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
