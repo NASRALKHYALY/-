@@ -4,110 +4,260 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ديني حياتي | نصر الخيالي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --accent: #d4af37;
+            --bg: #05060a;
+            --card: rgba(255, 255, 255, 0.03);
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.02);
+            --transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .light-theme {
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --glass: rgba(0, 0, 0, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background: var(--bg); color: var(--text); transition: background 0.8s ease; overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- الهيدر الكبسولة --- */
+        .header-wrap {
+            position: fixed;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 90%; max-width: 1100px;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 30px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; cursor: pointer;
+            transition: var(--transition);
+        }
+        .logo:hover { transform: scale(1.1); }
+        .logo i { font-size: 2rem; color: var(--accent); }
+        .logo span { font-weight: 900; font-size: 1.4rem; color: var(--text); }
+
+        .nav-links { display: flex; list-style: none; gap: 10px; }
+        .nav-links a {
+            color: var(--text); text-decoration: none;
+            padding: 10px 20px; border-radius: 50px;
+            font-size: 0.95rem; font-weight: 500;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { background: var(--accent); color: #000; transform: scale(1.15); }
+
+        /* --- زر النمط الليلي (مطور بحركة التكبير والتوهج) --- */
+        .theme-toggle-box {
+            width: 50px; height: 50px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; position: relative;
+            box-shadow: 0 0 20px var(--accent);
+            transition: var(--transition);
+        }
+        .theme-toggle-box:hover {
+            transform: scale(1.25); /* يكبر بنسبة 25% عند اللمس */
+            box-shadow: 0 0 35px var(--accent); /* توهج أقوى */
+            filter: brightness(1.1);
+        }
+        .theme-toggle-box:active { transform: scale(0.85) rotate(180deg); }
+        .theme-toggle-box i { font-size: 1.4rem; color: #000; transition: 0.5s; }
+
+        /* --- الهيرو --- */
+        .hero {
+            height: 80vh; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center; background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+        }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; transition: var(--transition); }
+
+        /* --- الكنوز (تكبير ودوران) --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        .grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        .knoz-card {
+            background: var(--card);
+            border: 1px solid rgba(212,175,55,0.1);
+            padding: 50px 30px; border-radius: 40px;
+            text-align: center; transition: var(--transition);
+            cursor: pointer;
+        }
+        .knoz-card:hover { transform: scale(1.15) translateY(-10px); border-color: var(--accent); }
+        .knoz-card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; transition: var(--transition); }
+        .knoz-card:hover i { transform: rotate(360deg) scale(1.1); }
+
+        /* --- المسبحة الرقمية --- */
+        .tasbih-area {
+            background: var(--card); border-radius: 80px;
+            padding: 60px; text-align: center;
+            border: 2px solid var(--accent);
+            max-width: 450px; margin: 0 auto;
+            transition: var(--transition);
+        }
+        .counter { font-size: 8rem; font-weight: 900; color: var(--accent); margin: 20px 0; }
+        .tap-btn {
+            width: 160px; height: 160px; border-radius: 50%;
+            border: none; background: var(--accent);
+            font-size: 1.8rem; font-weight: 900; cursor: pointer;
+            box-shadow: 0 15px 35px rgba(212,175,55,0.3);
+            transition: 0.1s;
+        }
+        .tap-btn:active { transform: scale(0.9); }
+
+        /* --- زر التصفير (تصميم مزين وجذاب) --- */
+        #reset {
+            margin-top: 30px;
+            padding: 10px 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #ff4d4d;
+            background: rgba(255, 77, 77, 0.05);
+            border: 1px solid rgba(255, 77, 77, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #reset::before { content: '\f2f1'; font-family: 'Font Awesome 6 Free'; }
+        #reset:hover {
+            background: #ff4d4d;
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(255, 77, 77, 0.3);
+            transform: translateY(-3px);
+        }
+        #reset:active { transform: scale(0.95); }
+
+        /* --- المصحف --- */
+        .quran-box { background: var(--card); padding: 40px; border-radius: 40px; text-align: center; border: 1px solid var(--glass); }
+        select { width: 100%; padding: 15px; border-radius: 15px; background: rgba(0,0,0,0.2); color: #fff; border: 1px solid var(--accent); margin-bottom: 20px; outline: none; }
+
+        footer { padding: 60px; text-align: center; opacity: 0.5; }
+    </style>
 </head>
-<body class="light-theme">
+<body class="dark-theme">
 
-    <audio id="quranAudio" src="https://server8.mp3quran.net/afs/001.mp3"></audio>
-
-    <div class="theme-switch" id="themeBtn" title="تغيير الوضع">
-        <i class="fas fa-moon"></i>
+    <div class="header-wrap">
+        <nav>
+            <a href="javascript:location.reload();" class="logo">
+                <i class="fas fa-mosque"></i>
+                <span>ديني حياتي</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#tips">الكنوز</a></li>
+                <li><a href="#quran">المصحف</a></li>
+                <li><a href="#tasbih">المسبحة</a></li>
+            </ul>
+            <div class="theme-toggle-box" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+        </nav>
     </div>
 
-    <nav>
-        <div class="logo-container">
-            <i class="fas fa-mosque logo-icon"></i>
-            <div class="logo">ديني حياتي</div>
-        </div>
-        <ul class="nav-links">
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#quran-list">المصحف</a></li>
-            <li><a href="#tasbih">المسبحة</a></li>
-            <li><a href="#tips">كنوز</a></li>
-            <li><a href="#random-section">نفحات</a></li>
-        </ul>
-    </nav>
+    <section class="hero" id="home">
+        <h1>إيمانُك.. <span style="color:var(--accent)">حياتُك</span></h1>
+        <p style="font-size: 1.3rem; opacity: 0.7;">زادُك اليومي في قالب تقني عصري</p>
+    </section>
 
-    <header id="home" class="hero-section">
-        <div class="hero-content">
-            <h1>ديني حياتي</h1>
-            <p>زادُك اليومي من الأجر والطمأنينة</p>
-            <div class="hero-btns">
-                <a href="#quran-list" class="btn-main"><i class="fas fa-book-open"></i> المصحف الشريف</a>
-                <a href="#tasbih" class="btn-sub">المسبحة الذكية</a>
-            </div>
+    <div class="container" id="tips">
+        <div class="grid">
+            <div class="knoz-card"><i class="fas fa-heart"></i><h3>النية الصادقة</h3><p>مفتاح قبول العمل هو الإخلاص لله.</p></div>
+            <div class="knoz-card"><i class="fas fa-book-quran"></i><h3>ورد القرآن</h3><p>نور لقلبك وضياء ليومك.</p></div>
+            <div class="knoz-card"><i class="fas fa-hands-praying"></i><h3>الدعاء</h3><p>صلة لا تنقطع بين العبد وربه.</p></div>
+            <div class="knoz-card"><i class="fas fa-sun"></i><h3>أذكار الصباح</h3><p>حصنك المتين طوال النهار.</p></div>
         </div>
-    </header>
+    </div>
 
-    <section id="tips" class="section">
-        <h2 class="section-title">كنوز إيمانية</h2>
-        <div class="grid-container">
-            <div class="info-card c1"><i class="fas fa-heart"></i><h3>إخلاص النية</h3><p>اجعل عملك خالصاً لله ليُقبل ويُبارك فيه.</p></div>
-            <div class="info-card c2"><i class="fas fa-book-quran"></i><h3>ورد القرآن</h3><p>نصيبك من القرآن هو نصيبك من السعادة.</p></div>
-            <div class="info-card c3"><i class="fas fa-hands-praying"></i><h3>لذة الدعاء</h3><p>لا يرد القدر إلا الدعاء، فألحّ بالدعاء.</p></div>
-            <div class="info-card c4"><i class="fas fa-sun"></i><h3>أذكار الصباح</h3><p>هي حصنك الحصين الذي يحميك يومك.</p></div>
-            <div class="info-card c5"><i class="fas fa-hand-holding-heart"></i><h3>الصدقة</h3><p>تطفئ غضب الرب وتزيد في الرزق.</p></div>
-            <div class="info-card c6"><i class="fas fa-moon"></i><h3>قيام الليل</h3><p>شرف المؤمن وموعدك مع ملك الملوك.</p></div>
+    <section class="container" id="quran">
+        <div class="quran-box">
+            <h2 style="margin-bottom: 20px;">المصحف المرتل</h2>
+            <select id="surahSelect"><option disabled selected>-- اختر السورة --</option></select>
+            <audio id="audioPlayer" controls style="width: 100%; margin-top: 20px;"></audio>
         </div>
     </section>
 
-    <section id="quran-list" class="section quran-section">
-        <h2 class="section-title">المصحف الشريف المرتل</h2>
-        <div class="quran-container">
-            <p>استمع إلى تلاوة عطرة لـ 114 سورة كاملة</p>
-            <div class="select-box">
-                <select id="surahSelect" class="surah-dropdown">
-                    <option value="" disabled selected>-- اختر السورة للاستماع --</option>
-                </select>
-            </div>
-            <div class="audio-player-container">
-                <h4 id="currentSurahName">اختر سورة للبدء</h4>
-                <audio id="mainQuranAudio" controls>
-                    متصفحك لا يدعم مشغل الصوت.
-                </audio>
-            </div>
-        </div>
-    </section>
-
-    <section id="tasbih" class="tasbih-section">
-        <div class="tasbih-pro-container">
-            <h3>مسبحة الأذكار</h3>
-            <div class="tasbih-screen">
-                <div class="tasbih-label">بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
-                <div class="counter-display" id="counter">0</div>
-                <div class="current-zekr" id="zekr-name">سبحان الله</div>
-            </div>
-            <div class="tasbih-buttons-gold">
-                <button class="main-tap-btn" id="tapBtn">سبّح</button>
-                <div class="side-controls">
-                    <button class="mini-gold-btn" id="resetBtn" title="تصفير"><i class="fas fa-power-off"></i></button>
-                    <button class="mini-gold-btn" id="changeZekrBtn" title="تبديل"><i class="fas fa-redo"></i></button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="random-section" class="random-section section">
-        <div class="glass-quote-box">
-            <h2><i class="fas fa-sparkles"></i> نفحة ربانية</h2>
-            <button id="playAudioBtn" class="audio-play-btn">
-                <i class="fas fa-play"></i> استمع لسورة الفاتحة
-            </button>
-            <div class="quote-body">
-                <p id="tip-display" class="fade-in">"وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا"</p>
-            </div>
-            <button id="newTipBtn" class="premium-refresh-btn">
-                <span>تجديد النصيحة</span> <i class="fas fa-sync-alt"></i>
-            </button>
+    <section class="container" id="tasbih">
+        <div class="tasbih-area">
+            <h3>المسبحة الرقمية</h3>
+            <div class="counter" id="countNum">0</div>
+            <button class="tap-btn" id="tapBtn">سبّح</button>
+            <br>
+            <button id="reset">تصفير العداد</button>
         </div>
     </section>
 
     <footer>
-        <p class="signature">صنع بواسطة <strong>نصر الخيالي</strong> | موقع ديني حياتي &copy; 2025</p>
+        <p>بواسطة نصر الخيالي &copy; 2025</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // النمط الليلي والنهاري
+        const themeBtn = document.getElementById('themeToggle');
+        themeBtn.onclick = () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeBtn.querySelector('i');
+            icon.style.transform = "scale(0)";
+            setTimeout(() => {
+                icon.className = document.body.classList.contains('light-theme') ? 'fas fa-sun' : 'fas fa-moon';
+                icon.style.transform = "scale(1)";
+            }, 200);
+        };
+
+        // المسبحة
+        let c = 0;
+        document.getElementById('tapBtn').onclick = () => {
+            c++;
+            document.getElementById('countNum').innerText = c;
+            if(navigator.vibrate) navigator.vibrate(40);
+        };
+        document.getElementById('reset').onclick = () => {
+            c = 0;
+            document.getElementById('countNum').innerText = 0;
+        };
+
+        // المصحف
+        const surahs = ["الفاتحة", "البقرة", "آل عمران", "النساء", "المائدة", "الأنعام", "الأعراف", "الأنفال", "التوبة", "يونس", "هود", "يوسف", "الرعد", "إبراهيم", "الحجر", "النحل", "الإسراء", "الكهف", "مريم", "طه", "الأنبياء", "الحج", "المؤمنون", "النور", "الفرقان", "الشعراء", "النمل", "القصص", "العنكبوت", "الروم", "لقمان", "السجدة", "الأحزاب", "سبأ", "فاطر", "يس", "الصافات", "ص", "الزمر", "غافر", "فصلت", "الشورى", "الزخرف", "الدخان", "الجاثية", "الأحقاف", "محمد", "الفتح", "الحجرات", "ق", "الذاريات", "الطور", "النجم", "القمر", "الرحمن", "الواقعة", "الحديد", "المجادلة", "الحشر", "الممتحنة", "الصف", "الجمعة", "المنافقون", "التغابن", "الطلاق", "التحريم", "الملك", "القلم", "الحاقة", "المعارج", "نوح", "الجن", "المزمل", "المدثر", "القيامة", "الإنسان", "المرسلات", "النبأ", "النازعات", "عبس", "التكوير", "الانفطار", "المطففين", "الانشقاق", "البروج", "الطارق", "الأعلى", "الغاشية", "الفجر", "البلد", "الشمس", "الليل", "الضحى", "الشرح", "التين", "العلق", "القدر", "البينة", "الزلزلة", "العاديات", "القارعة", "التكاثر", "العصر", "الهمزة", "الفيل", "قريش", "الماعون", "الكوثر", "الكافرون", "النصر", "المسد", "الإخلاص", "الفلق", "الناس"];
+        const sel = document.getElementById('surahSelect');
+        surahs.forEach((s, i) => {
+            let o = document.createElement('option');
+            o.value = (i + 1).toString().padStart(3, '0');
+            o.text = s; sel.appendChild(o);
+        });
+        sel.onchange = (e) => {
+            const audio = document.getElementById('audioPlayer');
+            audio.src = `https://server8.mp3quran.net/afs/${e.target.value}.mp3`;
+            audio.play();
+        };
+
+        // تنقل سموث
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
 </body>
 </html>
