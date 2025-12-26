@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديني حياتي | نصر</title>
+    <title>ديني حياتي | نصر الخيالي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -23,80 +23,89 @@
         </div>
         <ul class="nav-links">
             <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#tips">كنوز إيمانية</a></li>
+            <li><a href="#quran-list">المصحف</a></li>
             <li><a href="#tasbih">المسبحة</a></li>
-            <li><a href="#random-section">نصائح</a></li>
+            <li><a href="#tips">كنوز</a></li>
+            <li><a href="#random-section">نفحات</a></li>
         </ul>
     </nav>
 
     <header id="home" class="hero-section">
-        <div class="hero-overlay">
-            <div class="hero-content">
-                <h1>ديني حياتي</h1>
-                <p>زايدُك اليومي من الأجر والطمأنينة</p>
-                <div class="hero-btns">
-                    <a href="#tips" class="btn-main">نصائح ايمانية</a>
-                    <a href="#tasbih" class="btn-sub">ابدأ التسبيح</a>
-                </div>
+        <div class="hero-content">
+            <h1>ديني حياتي</h1>
+            <p>زادُك اليومي من الأجر والطمأنينة</p>
+            <div class="hero-btns">
+                <a href="#quran-list" class="btn-main"><i class="fas fa-book-open"></i> المصحف الشريف</a>
+                <a href="#tasbih" class="btn-sub">المسبحة الذكية</a>
             </div>
         </div>
     </header>
 
     <section id="tips" class="section">
-        <h2 class="section-title">نصائح إيمانية</h2>
+        <h2 class="section-title">كنوز إيمانية</h2>
         <div class="grid-container">
-            <div class="info-card c1"><i class="fas fa-heart"></i><h3>إخلاص النية</h3><p>اجعل عملك خالصاً لوجه الله ليُقبل ويُبارك فيه.</p></div>
-            <div class="info-card c2"><i class="fas fa-book-quran"></i><h3>ورد القرآن</h3><p>نصيبك من القرآن هو نصيبك من السعادة في يومك.</p></div>
-            <div class="info-card c3"><i class="fas fa-hands-praying"></i><h3>لذة الدعاء</h3><p>لا يرد القدر إلا الدعاء، فألحّ على الله بيقين تام.</p></div>
-            <div class="info-card c4"><i class="fas fa-sun"></i><h3>أذكار الصباح</h3><p>هي حصنك الحصين الذي يحميك من كل سوء طوال يومك.</p></div>
-            <div class="info-card c5"><i class="fas fa-hand-holding-heart"></i><h3>الصدقة الخفية</h3><p>تطفئ غضب الرب وتدفع ميتة السوء وتزيد في الرزق.</p></div>
-            <div class="info-card c6"><i class="fas fa-moon"></i><h3>قيام الليل</h3><p>شرف المؤمن وموعدك الخاص مع ملك الملوك.</p></div>
+            <div class="info-card c1"><i class="fas fa-heart"></i><h3>إخلاص النية</h3><p>اجعل عملك خالصاً لله ليُقبل ويُبارك فيه.</p></div>
+            <div class="info-card c2"><i class="fas fa-book-quran"></i><h3>ورد القرآن</h3><p>نصيبك من القرآن هو نصيبك من السعادة.</p></div>
+            <div class="info-card c3"><i class="fas fa-hands-praying"></i><h3>لذة الدعاء</h3><p>لا يرد القدر إلا الدعاء، فألحّ بالدعاء.</p></div>
+            <div class="info-card c4"><i class="fas fa-sun"></i><h3>أذكار الصباح</h3><p>هي حصنك الحصين الذي يحميك يومك.</p></div>
+            <div class="info-card c5"><i class="fas fa-hand-holding-heart"></i><h3>الصدقة</h3><p>تطفئ غضب الرب وتزيد في الرزق.</p></div>
+            <div class="info-card c6"><i class="fas fa-moon"></i><h3>قيام الليل</h3><p>شرف المؤمن وموعدك مع ملك الملوك.</p></div>
+        </div>
+    </section>
+
+    <section id="quran-list" class="section quran-section">
+        <h2 class="section-title">المصحف الشريف المرتل</h2>
+        <div class="quran-container">
+            <p>استمع إلى تلاوة عطرة لـ 114 سورة كاملة</p>
+            <div class="select-box">
+                <select id="surahSelect" class="surah-dropdown">
+                    <option value="" disabled selected>-- اختر السورة للاستماع --</option>
+                </select>
+            </div>
+            <div class="audio-player-container">
+                <h4 id="currentSurahName">اختر سورة للبدء</h4>
+                <audio id="mainQuranAudio" controls>
+                    متصفحك لا يدعم مشغل الصوت.
+                </audio>
+            </div>
         </div>
     </section>
 
     <section id="tasbih" class="tasbih-section">
         <div class="tasbih-pro-container">
-            <h3>تسبيحة الكترونية</h3>
-            <div class="tasbih-inner">
-                <div class="tasbih-screen">
-                    <div class="tasbih-label">بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
-                    <div class="counter-display" id="counter">0</div>
-                    <div class="current-zekr" id="zekr-name">سبحان الله</div>
-                </div>
-                <div class="tasbih-buttons-gold">
-                    <button class="main-tap-btn" id="tapBtn"><span>سبّح</span></button>
-                    <div class="side-controls">
-                        <button class="mini-gold-btn" id="resetBtn" title="تصفير العداد"><i class="fas fa-power-off"></i></button>
-                        <button class="mini-gold-btn" id="changeZekrBtn" title="تغيير الذكر"><i class="fas fa-redo"></i></button>
-                    </div>
+            <h3>مسبحة الأذكار</h3>
+            <div class="tasbih-screen">
+                <div class="tasbih-label">بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
+                <div class="counter-display" id="counter">0</div>
+                <div class="current-zekr" id="zekr-name">سبحان الله</div>
+            </div>
+            <div class="tasbih-buttons-gold">
+                <button class="main-tap-btn" id="tapBtn">سبّح</button>
+                <div class="side-controls">
+                    <button class="mini-gold-btn" id="resetBtn" title="تصفير"><i class="fas fa-power-off"></i></button>
+                    <button class="mini-gold-btn" id="changeZekrBtn" title="تبديل"><i class="fas fa-redo"></i></button>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="random-section" class="random-section">
+    <section id="random-section" class="random-section section">
         <div class="glass-quote-box">
-            <div class="sparkle-top"><i class="fas fa-star gold-icon"></i></div>
-            <h2 class="quote-title">نفحة ربانية</h2>
-            
+            <h2><i class="fas fa-sparkles"></i> نفحة ربانية</h2>
             <button id="playAudioBtn" class="audio-play-btn">
                 <i class="fas fa-play"></i> استمع لسورة الفاتحة
             </button>
-
             <div class="quote-body">
-                <i class="fas fa-quote-right quote-icon"></i>
-                <p id="tip-display">"وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا"</p>
-                <i class="fas fa-quote-left quote-icon"></i>
+                <p id="tip-display" class="fade-in">"وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا"</p>
             </div>
             <button id="newTipBtn" class="premium-refresh-btn">
-                <span>تجديد النصيحة</span>
-                <i class="fas fa-wand-magic-sparkles"></i>
+                <span>تجديد النصيحة</span> <i class="fas fa-sync-alt"></i>
             </button>
         </div>
     </section>
 
     <footer>
-        <p class="signature">صنع بواسطة <strong>نصرالخيالي</strong> | موقع ديني حياتي &copy; 2025</p>
+        <p class="signature">صنع بواسطة <strong>نصر الخيالي</strong> | موقع ديني حياتي &copy; 2025</p>
     </footer>
 
     <script src="script.js"></script>
